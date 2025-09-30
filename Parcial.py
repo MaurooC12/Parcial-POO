@@ -1,7 +1,8 @@
-# Author: Mauricio Cepeda Villanueva
+# Autor: Mauricio Cepeda Villanueva
 # Curso: Programación Orientada a Objetos
 # Fecha: 2024-06-20
-# Sistema de gestión para una biblioteca universitaria. 
+# Sistema de gestión para una biblioteca universitaria.
+
 class Libro:
     def __init__(self, tituloLibro, categoriaLibro):
         self.tituloLibro = tituloLibro
@@ -9,12 +10,22 @@ class Libro:
 
     def verDetalles(self):
         return f'\tTítulo: {self.tituloLibro} \n\tCategoría: {self.categoriaLibro}'
+
     def verTitulo(self):
-        return f'\tTítulo: {self.tituloLibro}'
-    
-class Usuario:
+        return self.tituloLibro
+
+
+class Persona:
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def verNombre(self):
+        return self.nombre
+
+
+class Usuario(Persona):
     def __init__(self, nombreUsuario, carreraUsuario, libroDeInteres):
-        self._nombreUsuario = nombreUsuario
+        super().__init__(nombreUsuario)
         self.carreraUsuario = carreraUsuario
         self.__libroDeInteres = libroDeInteres
 
@@ -27,7 +38,7 @@ class Usuario:
         self.__libroDeInteres = nuevoLibro
 
     def verDetalles(self):
-        return f'\tUsuario: {self._nombreUsuario} \n\tCarrera: {self.carreraUsuario}'
+        return f'\tUsuario: {self.verNombre()} \n\tCarrera: {self.carreraUsuario}'
 
 
 class Libreria:
@@ -60,7 +71,7 @@ class Libreria:
         if not encontrados:
             print(f"No hay libros en la categoría '{categoria}'.")
         for libro in encontrados:
-            print(libro.verTitulo())
+            print("Título:", libro.verTitulo())
 
     def mostrarUsuarios(self):
         if not self._usuarios:
